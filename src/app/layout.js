@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,7 +13,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="h-screen gap-1 flex flex-col">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
