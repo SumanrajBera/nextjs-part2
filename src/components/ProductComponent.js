@@ -1,16 +1,19 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductCard({ product }) {
     return (
         <div className="max-w-sm overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md transition hover:shadow-lg">
             <div className="relative h-64 w-full bg-gray-100">
-                <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    sizes="300px"
-                    className="object-contain p-4"
-                />
+                <Link href={`/products/${product.id}`} className="relative block w-full h-full">
+                    <Image
+                        src={product.image}
+                        alt={product.title}
+                        fill
+                        sizes="300px"
+                        className="object-contain p-4"
+                    />
+                </Link>
             </div>
 
             <div className="p-4">

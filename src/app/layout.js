@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     >
       <body className="h-screen gap-1 flex flex-col">
         <Navbar />
-        {children}
+        <div className="px-8 flex-1">{children}</div>
       </body>
     </html>
   );
