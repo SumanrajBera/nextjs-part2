@@ -7,7 +7,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const Page = () => {
+    const [formData, setFormData] = useState({})
     const [showPassword, setShowPassword] = useState(false);
+    console.log(formData)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+
+        setFormData({ ...formData, [name]: value })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
     return (
         <div className="flex h-full items-center justify-center px-4">
             <div className="w-full max-w-md rounded-xl border bg-background p-8 shadow-sm">
@@ -18,22 +30,26 @@ const Page = () => {
                     </p>
                 </div>
 
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="space-y-2">
                         <Label htmlFor="username">Username</Label>
                         <Input
+                            name="username"
                             id="username"
                             type="text"
                             placeholder="Enter your username"
+                            onChange={handleChange}
                         />
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="email">Email</Label>
                         <Input
+                            name="email"
                             id="email"
                             type="email"
                             placeholder="Enter your email"
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -41,9 +57,11 @@ const Page = () => {
                         <Label htmlFor="password">Password</Label>
                         <div className="relative">
                             <Input
+                                name="password"
                                 id="password"
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Create a password"
+                                onChange={handleChange}
                             />
                             <button
                                 type="button"
