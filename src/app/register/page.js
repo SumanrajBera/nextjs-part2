@@ -17,9 +17,17 @@ const Page = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        try {
+            let result = await api.post("/api/auth/register", formData)
+            router.push("/login")
+        } catch (err) {
+            console.log("Error while log in", err)
+        }
     }
+
     return (
         <div className="flex h-full items-center justify-center px-4">
             <div className="w-full max-w-md rounded-xl border bg-background p-8 shadow-sm">

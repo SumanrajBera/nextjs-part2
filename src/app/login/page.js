@@ -5,8 +5,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { api } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+    const router = useRouter()
     const [formData, setFormData] = useState({})
     const [showPassword, setShowPassword] = useState(false);
 
@@ -16,8 +19,15 @@ const Page = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        try {
+            let result = await api.post("/api/auth/login", formData)
+            router.push("/home")
+        } catch (err) {
+            console.log("Error while log in", err)
+        }
     }
 
     return (
@@ -33,13 +43,13 @@ const Page = () => {
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="space-y-2">
                         <Label htmlFor="email">
-                            Email / Username
+                            Email
                         </Label>
                         <Input
-                            name="identifier"
+                            name="email"
                             id="email"
                             type="text"
-                            placeholder="Enter your email or username"
+                            placeholder="Enter your email"
                             onChange={handleChange}
                         />
                     </div>
