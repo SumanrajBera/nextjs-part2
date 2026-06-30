@@ -7,11 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { api } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/authContext";
 
 const Page = () => {
     const router = useRouter()
     const [formData, setFormData] = useState({})
     const [showPassword, setShowPassword] = useState(false);
+    const { hydrateUser } = useAuth()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -24,6 +26,9 @@ const Page = () => {
 
         try {
             let result = await api.post("/api/auth/login", formData)
+
+            await hydrateUser()
+
             router.push("/home")
         } catch (err) {
             console.log("Error while log in", err)

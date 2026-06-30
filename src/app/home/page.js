@@ -1,10 +1,13 @@
+import ProtectedRoute from '@/components/ProtectedRoute'
 import React from 'react'
 
 const page = () => {
   return (
-    <div >
-      This is home page
-    </div>
+    <ProtectedRoute>
+      <div >
+        This is home page
+      </div>
+    </ProtectedRoute>
   )
 }
 
