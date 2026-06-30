@@ -1,5 +1,6 @@
 // 'use client'
 import ProductCard from '@/components/ProductComponent';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import axios from 'axios'
 import React from 'react'
 
@@ -9,13 +10,15 @@ const page = async () => {
     let products = await res.json()
 
     return (
-        <div className='grid grid-cols-4 gap-2 m-2'>
-            {
-                products.map(product => {
-                    return <ProductCard key={product.id} product={product} />
-                })
-            }
-        </div>
+        <ProtectedRoute>
+            <div className='grid grid-cols-4 gap-2 m-2'>
+                {
+                    products.map(product => {
+                        return <ProductCard key={product.id} product={product} />
+                    })
+                }
+            </div>
+        </ProtectedRoute>
     )
 }
 

@@ -7,7 +7,6 @@ import React, { useEffect } from 'react'
 const ProtectedRoute = ({ children }) => {
     let router = useRouter()
     let { user, loading } = useAuth()
-    console.log("ProtectedRoute", { loading, user });
 
     useEffect(() => {
         if (!loading && !user) {
